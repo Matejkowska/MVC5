@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MVC5.Models.Dzialy>
+
+@{
+    ViewBag.Title = "Lista działów";
+}
+
+<h2>Działy</h2>
+
+<div style="width:85%">
+    <table class="table table-hover">
+        <tr class="table-primary">
+            <th>
+                @Html.DisplayNameFor(model => model.Nazwa)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="table-secondary">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nazwa)
+                </td>
+                <td>
+                    <input type="button" class="btn btn-info" value="Edytuj nazwę działu" onclick="location.href='@Url.Action("Edit", new { id = item.Id })'" />
+                    <input type="button" class="btn btn-danger" value="Usuń dział" onclick="location.href='@Url.Action("Delete", new { id = item.Id })'" />
+                   
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<p>
+   
+    <input type="button" class="btn btn-info" value="Dodaj nowy dział" onclick="location.href='@Url.Action("Create")'" />
+</p>

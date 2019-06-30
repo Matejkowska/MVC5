@@ -1,0 +1,66 @@
+﻿@model MVC5.Models.Zadania
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Zadania</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis_zadania)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opis_zadania)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IloscGodzin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IloscGodzin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zlecono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zlecono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dzialy.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dzialy.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pracownicy.Nazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pracownicy.Nazwisko)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

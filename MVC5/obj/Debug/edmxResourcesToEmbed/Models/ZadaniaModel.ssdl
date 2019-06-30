@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MVC5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Dzialy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nazwa" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pracownicy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nazwisko" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="Imie" Type="nchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Zadania">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Opis_zadania" Type="nchar" MaxLength="200" Nullable="false" />
+    <Property Name="IdPracownika" Type="int" Nullable="false" />
+    <Property Name="IloscGodzin" Type="float" Nullable="false" />
+    <Property Name="Deadline" Type="date" Nullable="false" />
+    <Property Name="Zlecono" Type="date" Nullable="false" />
+    <Property Name="IdDzialu" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Zadania_Dzialy">
+    <End Role="Dzialy" Type="Self.Dzialy" Multiplicity="1" />
+    <End Role="Zadania" Type="Self.Zadania" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dzialy">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Zadania">
+        <PropertyRef Name="IdDzialu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zadania_Pracownicy">
+    <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="1" />
+    <End Role="Zadania" Type="Self.Zadania" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pracownicy">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Zadania">
+        <PropertyRef Name="IdPracownika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MVC5ModelStoreContainer">
+    <EntitySet Name="Dzialy" EntityType="Self.Dzialy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pracownicy" EntityType="Self.Pracownicy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Zadania" EntityType="Self.Zadania" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Zadania_Dzialy" Association="Self.FK_Zadania_Dzialy">
+      <End Role="Dzialy" EntitySet="Dzialy" />
+      <End Role="Zadania" EntitySet="Zadania" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zadania_Pracownicy" Association="Self.FK_Zadania_Pracownicy">
+      <End Role="Pracownicy" EntitySet="Pracownicy" />
+      <End Role="Zadania" EntitySet="Zadania" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

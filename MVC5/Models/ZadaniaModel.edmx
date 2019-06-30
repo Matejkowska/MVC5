@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MVC5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dzialy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pracownicy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwisko" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="Imie" Type="nchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Zadania">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Opis_zadania" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="IdPracownika" Type="int" Nullable="false" />
+          <Property Name="IloscGodzin" Type="float" Nullable="false" />
+          <Property Name="Deadline" Type="date" Nullable="false" />
+          <Property Name="Zlecono" Type="date" Nullable="false" />
+          <Property Name="IdDzialu" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Zadania_Dzialy">
+          <End Role="Dzialy" Type="Self.Dzialy" Multiplicity="1" />
+          <End Role="Zadania" Type="Self.Zadania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dzialy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zadania">
+              <PropertyRef Name="IdDzialu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zadania_Pracownicy">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="1" />
+          <End Role="Zadania" Type="Self.Zadania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zadania">
+              <PropertyRef Name="IdPracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVC5ModelStoreContainer">
+          <EntitySet Name="Dzialy" EntityType="Self.Dzialy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pracownicy" EntityType="Self.Pracownicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zadania" EntityType="Self.Zadania" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Zadania_Dzialy" Association="Self.FK_Zadania_Dzialy">
+            <End Role="Dzialy" EntitySet="Dzialy" />
+            <End Role="Zadania" EntitySet="Zadania" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zadania_Pracownicy" Association="Self.FK_Zadania_Pracownicy">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Zadania" EntitySet="Zadania" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MVC5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dzialy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Zadania" Relationship="Self.FK_Zadania_Dzialy" FromRole="Dzialy" ToRole="Zadania" />
+        </EntityType>
+        <EntityType Name="Pracownicy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwisko" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Imie" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Zadania" Relationship="Self.FK_Zadania_Pracownicy" FromRole="Pracownicy" ToRole="Zadania" />
+        </EntityType>
+        <EntityType Name="Zadania">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Opis_zadania" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IdPracownika" Type="Int32" Nullable="false" />
+          <Property Name="IloscGodzin" Type="Double" Nullable="false" />
+          <Property Name="Deadline" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Zlecono" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdDzialu" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dzialy" Relationship="Self.FK_Zadania_Dzialy" FromRole="Zadania" ToRole="Dzialy" />
+          <NavigationProperty Name="Pracownicy" Relationship="Self.FK_Zadania_Pracownicy" FromRole="Zadania" ToRole="Pracownicy" />
+        </EntityType>
+        <Association Name="FK_Zadania_Dzialy">
+          <End Role="Dzialy" Type="Self.Dzialy" Multiplicity="1" />
+          <End Role="Zadania" Type="Self.Zadania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dzialy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zadania">
+              <PropertyRef Name="IdDzialu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zadania_Pracownicy">
+          <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="1" />
+          <End Role="Zadania" Type="Self.Zadania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pracownicy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zadania">
+              <PropertyRef Name="IdPracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVC5Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dzialy" EntityType="Self.Dzialy" />
+          <EntitySet Name="Pracownicy" EntityType="Self.Pracownicy" />
+          <EntitySet Name="Zadania" EntityType="Self.Zadania" />
+          <AssociationSet Name="FK_Zadania_Dzialy" Association="Self.FK_Zadania_Dzialy">
+            <End Role="Dzialy" EntitySet="Dzialy" />
+            <End Role="Zadania" EntitySet="Zadania" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zadania_Pracownicy" Association="Self.FK_Zadania_Pracownicy">
+            <End Role="Pracownicy" EntitySet="Pracownicy" />
+            <End Role="Zadania" EntitySet="Zadania" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MVC5ModelStoreContainer" CdmEntityContainer="MVC5Entities">
+          <EntitySetMapping Name="Dzialy">
+            <EntityTypeMapping TypeName="MVC5Model.Dzialy">
+              <MappingFragment StoreEntitySet="Dzialy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pracownicy">
+            <EntityTypeMapping TypeName="MVC5Model.Pracownicy">
+              <MappingFragment StoreEntitySet="Pracownicy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zadania">
+            <EntityTypeMapping TypeName="MVC5Model.Zadania">
+              <MappingFragment StoreEntitySet="Zadania">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Opis_zadania" ColumnName="Opis_zadania" />
+                <ScalarProperty Name="IdPracownika" ColumnName="IdPracownika" />
+                <ScalarProperty Name="IloscGodzin" ColumnName="IloscGodzin" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="Zlecono" ColumnName="Zlecono" />
+                <ScalarProperty Name="IdDzialu" ColumnName="IdDzialu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,32 @@
+﻿@model MVC5.Models.Dzialy
+
+@{
+    ViewBag.Title = "Usuń dział";
+}
+
+<h2>Usuń dział</h2>
+
+<h3>Czy jesteś pewien, że chcesz usunąć ten dział?</h3>
+<div>
+    <h4>Dzialy</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń ten dział" class="btn btn-danger" /> |
+            <input type="button" class="btn btn-warning" value="Wróć do listy działów" onclick="location.href='@Url.Action("Index")'" />
+        </div>
+    }
+</div>

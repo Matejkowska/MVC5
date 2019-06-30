@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MVC5ModelStoreContainer" CdmEntityContainer="MVC5Entities">
+    <EntitySetMapping Name="Dzialy">
+      <EntityTypeMapping TypeName="MVC5Model.Dzialy">
+        <MappingFragment StoreEntitySet="Dzialy">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pracownicy">
+      <EntityTypeMapping TypeName="MVC5Model.Pracownicy">
+        <MappingFragment StoreEntitySet="Pracownicy">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+          <ScalarProperty Name="Imie" ColumnName="Imie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zadania">
+      <EntityTypeMapping TypeName="MVC5Model.Zadania">
+        <MappingFragment StoreEntitySet="Zadania">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Opis_zadania" ColumnName="Opis_zadania" />
+          <ScalarProperty Name="IdPracownika" ColumnName="IdPracownika" />
+          <ScalarProperty Name="IloscGodzin" ColumnName="IloscGodzin" />
+          <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+          <ScalarProperty Name="Zlecono" ColumnName="Zlecono" />
+          <ScalarProperty Name="IdDzialu" ColumnName="IdDzialu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

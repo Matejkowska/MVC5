@@ -1,0 +1,40 @@
+﻿@model MVC5.Models.Pracownicy
+
+@{
+    ViewBag.Title = "Usuń pracownika";
+}
+
+<h2>Usuń pracownika</h2>
+
+<h3>Czy jesteś pewien, że chcesz usunąć tego pracownika?</h3>
+<div>
+    <h4>Pracownicy</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwisko)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imie)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Usuń tego pracownika" class="btn btn-danger" /> |
+        <input type="button" class="btn btn-warning" value="Wróć do listy pracowników" onclick="location.href='@Url.Action("Index")'" />
+    </div>
+    }
+</div>

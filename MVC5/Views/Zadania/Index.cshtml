@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MVC5.Models.Zadania>
+
+@{
+    ViewBag.Title = "Lista zadań";
+}
+
+<h2>Zadania</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Opis_zadania)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IloscGodzin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zlecono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dzialy.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pracownicy.Nazwisko)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis_zadania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IloscGodzin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zlecono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dzialy.Nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pracownicy.Nazwisko)
+            </td>
+            <td>
+                <input type="button" class="btn btn-info" value="Edytuj zadanie" onclick="location.href='@Url.Action("Edit", new { id = item.Id })'" />
+                <input type="button" class="btn btn-danger" value="Usuń zadanie" onclick="location.href='@Url.Action("Delete", new { id = item.Id })'" />
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+
+    <input type="button" class="btn btn-info" value="Dodaj nowe zadanie" onclick="location.href='@Url.Action("Create")'" />
+</p>
+

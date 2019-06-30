@@ -1,0 +1,72 @@
+﻿@model MVC5.Models.Zadania
+
+@{
+    ViewBag.Title = "Usuń zadanie";
+}
+
+<h2>Usuń zadanie</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Zadania</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis_zadania)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opis_zadania)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IloscGodzin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IloscGodzin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zlecono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zlecono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dzialy.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dzialy.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pracownicy.Nazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pracownicy.Nazwisko)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Usuń to zadanie" class="btn btn-danger" /> |
+        <input type="button" class="btn btn-warning" value="Wróć do listy zadań" onclick="location.href='@Url.Action("Index")'" />
+    </div>
+    }
+</div>
